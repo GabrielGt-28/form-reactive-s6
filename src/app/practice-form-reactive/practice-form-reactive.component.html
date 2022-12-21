@@ -1,0 +1,55 @@
+<div class="container form">
+  <form [formGroup]="form" (ngSubmit)="send()">
+    <div class="mb-4">
+      <input
+        type="text"
+        class="form-control mt-3"
+        placeholder="name"
+        id="name"
+        formControlName="name"
+      />
+      <div
+        class="alert alert-danger mt-2"
+        *ngIf="form.get('name')?.touched && form.get('name')?.errors?.['required'] "
+      >
+        Debe tener como minimo 10 caracteres
+      </div>
+    </div>
+    <div class="mb-4">
+      <input
+        type="email"
+        class="form-control mt-3"
+        placeholder="email"
+        id="email"
+        formControlName="email"
+      />
+      <div
+        class="alert alert-danger mt-2"
+        *ngIf="form.get('email')?.errors?.['email']"
+      >
+        El email no es valido
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <textarea
+        placeholder="Mensaje..."
+        class="form-control"
+        rows="3"
+        id="message"
+        formControlName="message"
+      ></textarea>
+      <div
+        class="alert alert-danger mt-2"
+        *ngIf="form.get('message')?.errors?.['required']"
+      >
+        El mensaje no puede quedar vacio
+      </div>
+    </div>
+
+    <button class="btn btn-primary" type="submit" [disabled]="form.invalid">
+      Enviar
+    </button>
+  </form>
+  <h3>{{ result }}</h3>
+</div>
